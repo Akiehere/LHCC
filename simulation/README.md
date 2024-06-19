@@ -1,7 +1,7 @@
 # LHCC NS-3 simulator
 
 ## HPCC
-It is based on NS-3 version 3.17.
+It is based on NS-3 version 3.17. python 2.7
 
 ### Quick Start
 
@@ -13,7 +13,7 @@ Please note if gcc version > 5, compilation will fail due to some ns3 code style
 `CC='gcc-5' CXX='g++-5' ./waf configure`
 
 #### Experiment config
-Please see `mix/config.txt` for example. 
+Please see `mix/1/ for example. 
 
 `mix/config_doc.txt` is a explanation of the example (texts in {..} are explanations).
 
@@ -39,4 +39,4 @@ The direct command to run is:
  
 python start.py <folder>
 
-python start.py 1 -> /mix/1
+python start.py 1 

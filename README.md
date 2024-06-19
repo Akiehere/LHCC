@@ -12,7 +12,7 @@ We provide a few analysis scripts under `analysis/` to view the packet-level eve
 
 
 ## Questions
-
+Please first search for any similar issues in https://github.com/alibaba-edu/High-Precision-Congestion-Control
 For technical questions, please create an issue in this repo, so other people can benefit from your questions. 
 You may also check the issue list first to see if people have already asked the questions you have :)
 
