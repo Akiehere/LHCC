@@ -46,4 +46,13 @@ QLEN_MON_START				0
 QLEN_MON_END				0
 maxRtt=12480 maxBdp=156000
 Running Simulation.
-11.0562
+46
+46
+46
+46
+46
+46
+46
+46
+11.9333
+80000

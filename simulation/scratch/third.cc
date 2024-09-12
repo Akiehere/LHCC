@@ -91,7 +91,7 @@ int fat_tree_k = 8;
 unordered_map<uint64_t, uint32_t> rate2kmax, rate2kmin;
 unordered_map<uint64_t, double> rate2pmax;
 
-double rtt_cnt = 0;
+double NT_cnt = 0;
 
 /************************************************
  * Runtime varibles
@@ -188,7 +188,7 @@ void qp_finish(FILE *fout, Ptr<RdmaQueuePair> q)
 {
 	uint32_t sid = ip_to_node_id(q->sip), did = ip_to_node_id(q->dip);
 	uint64_t base_rtt = pairRtt[sid][did], b = pairBw[sid][did];
-	uint32_t total_bytes = q->m_size + ((q->m_size - 1) / packet_payload_size + 1) * (CustomHeader::GetStaticWholeHeaderSize() - IntHeader::GetStaticSize()) - 1048; // translate to the minimum bytes required (with header but no INT)
+	uint32_t total_bytes = q->m_size + ((q->m_size - 1) / packet_payload_size + 1) * (CustomHeader::GetStaticWholeHeaderSize() - IntHeader::GetStaticSize()); // translate to the minimum bytes required (with header but no INT)
 	// printf("c:%d\n",CustomHeader::GetStaticWholeHeaderSize() - IntHeader::GetStaticSize());
 	uint64_t standalone_fct = base_rtt + total_bytes * 8000000000lu / b;
 	// sip, dip, sport, dport, size (B), start_time, fct (ns), standalone_fct (ns)
@@ -199,7 +199,7 @@ void qp_finish(FILE *fout, Ptr<RdmaQueuePair> q)
 	Ptr<Node> dstNode = n.Get(did);
 	Ptr<RdmaDriver> rdma = dstNode->GetObject<RdmaDriver>();
 	rdma->m_rdma->DeleteRxQp(q->sip.Get(), q->m_pg, q->sport);
-	rtt_cnt += q->nt_cnt;
+	NT_cnt += q->nt_cnt;
 }
 
 // pfc file format
@@ -1210,4 +1210,5 @@ int main(int argc, char *argv[])
 
 	endt = clock();
 	std::cout << (double)(endt - begint) / CLOCKS_PER_SEC << "\n";
+	cout<<NT_cnt<<endl;
 }

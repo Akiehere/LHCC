@@ -447,13 +447,16 @@ namespace ns3
 
 	int RdmaHw::ReceiveNT(Ptr<Packet> p, CustomHeader &ch)
 	{
-
 		uint16_t port = ch.nt.dport;
 		Ptr<RdmaQueuePair> qp = GetQp(ch.dip, port, 3);
 		if (qp == NULL)
 		{
 			printf("qp==null\n");
 			return -1;
+		}
+		if (qp->nt_cnt == 0)
+		{
+			// std::cout<<p->GetSize()<<std::endl;
 		}
 		if (m_cc_mode == 11)
 			HandleLHCC(qp, p, ch);
@@ -1372,7 +1375,7 @@ namespace ns3
 
 	void RdmaHw::HandleLHCC(Ptr<RdmaQueuePair> qp, Ptr<Packet> p, CustomHeader &ch)
 	{
-		// qp->nt_cnt += 1;
+		qp->nt_cnt += 1;
 		auto it = qp->ip_to_u.find(ch.sip);
 		if (it == qp->ip_to_u.end())
 		{
